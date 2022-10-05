@@ -9,6 +9,5 @@ var sounds = [
 ];
 
 function sound(){
-     sounds[1].s.play()//plays the sound
-     console.log("babe")
+     sounds[Math.floor(Math.random()*(7-0+1))+0].s.play()
 }
