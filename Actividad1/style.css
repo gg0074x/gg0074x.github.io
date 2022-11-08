@@ -1,0 +1,21 @@
+body{
+    background: #1a1a1a;
+    text-align: center;
+    text-orientation: sideways;
+    color: #e0e0e0;
+}
+
+h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+}
+
+h2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+button{
+    background: #f00707;
+    width: 400px;
+    height: 100px;
+}
