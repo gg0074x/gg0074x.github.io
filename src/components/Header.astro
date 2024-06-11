@@ -1,0 +1,207 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
+---
+
+<header>
+  <nav>
+    <div class="brand">
+      <img src="../../favicon.svg" alt="logo" />
+      <h2><a href="/">{SITE_TITLE}</a></h2>
+    </div>
+
+    <div class="internal-links">
+      <HeaderLink href="/">home</HeaderLink>
+      <HeaderLink href="/blog">blog</HeaderLink>
+      <HeaderLink href="/about">about</HeaderLink>
+    </div>
+    <div class="social-links">
+      <div class="dropdown">
+        <button class="dropbtn"
+          >Pages
+          <span class="material-symbols-rounded" id="dropdown-icon"></span>
+        </button>
+        <div class="dropdown-content">
+          <a href="/">Home</a>
+          <a href="/blog">Blog</a>
+          <a href="/about">About Me</a>
+        </div>
+      </div>
+      <button class="theme-button" id="theme-toggle">
+        <span class="material-symbols-rounded" , id="theme-icon">dark_mode</span
+        >
+      </button>
+    </div>
+  </nav>
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme) {
+      // Set the body data-theme attribute to match the local storage item
+      document.documentElement.setAttribute("data-theme", currentTheme);
+
+      // If the current theme is dark, check the theme toggle
+      if (currentTheme === "dark") {
+        if (themeIcon) {
+          themeIcon.textContent = "light_mode";
+        }
+      }
+    }
+
+    function switchTheme(e) {
+      console.log("gwgwsgsagsg");
+      if (document.documentElement.getAttribute("data-theme") == "light") {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+        if (themeIcon) themeIcon.textContent = "light_mode";
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+        if (themeIcon) themeIcon.textContent = "dark_mode";
+      }
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", switchTheme);
+      console.log("gedfdwdwd");
+    }
+  </script>
+</header>
+<style>
+  header {
+    max-height: 3em;
+    margin: 0;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 2px 8px rgba(var(--gray), 15%);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  h2 {
+    margin: 0;
+    font-size: 1em;
+  }
+
+  h2 a,
+  h2 a.active {
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1em;
+  }
+  nav a {
+    padding: 0.5em 0.5em;
+    color: var(--black);
+    text-decoration: none;
+  }
+  nav a.active {
+    text-decoration: none;
+  }
+  .social-links,
+  .social-links a {
+    display: flex;
+    width: 140px;
+    justify-content: end;
+    align-items: center;
+  }
+  .brand {
+    display: flex;
+    width: 140px;
+    align-items: center;
+  }
+  .theme-button {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    border-radius: 360px;
+    width: 3em;
+    height: 3em;
+    border: none;
+    background: none;
+    transition: ease-in-out 0.2s;
+  }
+  .theme-button:hover {
+    background: rgba(var(--black), 25%);
+  }
+  .material-symbols-rounded {
+    color: var(--font-color);
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+    display: none;
+    align-items: center;
+  }
+
+  #dropdown-icon::before {
+    content: "menu";
+  }
+
+  /* Style the dropdown button to fit inside the topnav */
+  .dropdown .dropbtn {
+    display: flex;
+    gap: 0.2em;
+    align-items: center;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    color: var(--font-color);
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  /* Style the dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(var(--background-color));
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 20px;
+    right: 1em;
+  }
+
+  /* Style the links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: var(--font-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  /* Show the dropdown menu when the user moves the mouse over the dropdown button */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropbtn:hover #dropdown-icon::before {
+    content: "menu_open";
+  }
+
+  @media (max-width: 720px) {
+    .internal-links {
+      display: none;
+    }
+    header {
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
+    .theme-button:hover {
+      background: none;
+    }
+    .dropdown {
+      display: block;
+    }
+  }
+</style>
