@@ -37,6 +37,16 @@ import { SITE_TITLE } from "../consts";
     const themeToggle = document.getElementById("theme-toggle");
     const themeIcon = document.getElementById("theme-icon");
     const currentTheme = localStorage.getItem("theme");
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches &&
+      currentTheme == null
+    ) {
+      console.log("switching to dark mode")
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+      if (themeIcon) themeIcon.textContent = "light_mode";
+    }
     if (currentTheme) {
       // Set the body data-theme attribute to match the local storage item
       document.documentElement.setAttribute("data-theme", currentTheme);
