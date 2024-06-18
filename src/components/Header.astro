@@ -50,7 +50,6 @@ import { SITE_TITLE } from "../consts";
     }
 
     function switchTheme(e) {
-      console.log("gwgwsgsagsg");
       if (document.documentElement.getAttribute("data-theme") == "light") {
         document.documentElement.setAttribute("data-theme", "dark");
         localStorage.setItem("theme", "dark");
@@ -64,7 +63,6 @@ import { SITE_TITLE } from "../consts";
 
     if (themeToggle) {
       themeToggle.addEventListener("click", switchTheme);
-      console.log("gedfdwdwd");
     }
   </script>
 </header>
@@ -82,6 +80,7 @@ import { SITE_TITLE } from "../consts";
   h2 {
     margin: 0;
     font-size: 1em;
+    user-select: none;
   }
 
   h2 a,
@@ -98,9 +97,13 @@ import { SITE_TITLE } from "../consts";
     padding: 0.5em 0.5em;
     color: var(--black);
     text-decoration: none;
+    user-select: none;
   }
   nav a.active {
     text-decoration: none;
+  }
+  nav a:hover {
+    transform: scale(1.1);
   }
   .social-links,
   .social-links a {

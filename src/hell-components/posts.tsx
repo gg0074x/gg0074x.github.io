@@ -66,7 +66,7 @@ export default function Posts({ posters }) {
       </div>
       <section>
         {posts.length === 0 ? (
-          <h3>No posts found. Try another term.</h3>
+          <h3 style={{ textAlign: "center" }}>No posts found :(</h3>
         ) : (
           <ul>
             {posts?.map((post) => (

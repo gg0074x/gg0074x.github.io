@@ -1,71 +1,54 @@
 ---
 import Layout from "../layouts/BlogPost.astro";
+
+const birth = new Date(2005, 0o7, 17);
+const today = new Date();
+let age = 0;
+if (today.getMonth() > 0o7) {
+  age = today.getFullYear() - birth.getFullYear();
+} else {
+  age = today.getFullYear() - birth.getFullYear() - 1;
+}
 ---
 
 <Layout
-  title="About Me"
-  description="Lorem ipsum dolor sit amet"
-  pubDate={new Date("August 08 2021")}
+  title="About Me :>"
+  description="If you see this, you are pretty cool"
+  pubDate={new Date("June 17 2024")}
 >
   <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo
-    integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis
-    egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In
-    hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat.
-    Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu
-    non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim.
-    Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed
-    vulputate mi. Dictumst quisque sagittis purus sit amet.
+    There is not so much about me to talk about, but here we go! <br />
+    I'm a simple {age}-year-old guy from Argentina who loves programming and a
+    bunch of other things related to computers, the internet, and Japan! <br />
+    I have been using computers since a young age, and i've always had some kind
+    of hunger for building and creating stuff myself! So i started playing with things
+    like Scratch and PSeint, after some time i decided i wanted to be a game dev
+    and had my first time using a Game Engine, which was Unreal Engine. <br />
+    Anyways that didn't really stick with me too long so i started playing with code
+    editors and some Python, and to this day i keep exploring new tools and frameworks!
   </p>
 
   <p>
-    Morbi tristique senectus et netus. Id semper risus in hendrerit gravida
-    rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus
-    sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris
-    rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus
-    dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-    massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius
-    morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras
-    ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est
-    ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa
-    ultricies mi.
+    Enough from the past—what am i doing right now? <br />
+    <br />
+    I have been recently centering myself into low-level programming languages and
+    tools, like Rust, Assembly, C, assemblers, linkers and compilers! <br />
+    I aspire to be an OSDev some day! <br />
+    I also have experience building Web Apps and native apps with Tauri, Electron,
+    Flutter and Android Studio. <br />
+    And this website, which is built with Astro! <br />
   </p>
 
   <p>
-    Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque.
-    Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac
-    felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit
-    amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed
-    elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-    dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra.
-    Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum
-    consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus
-    ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-    facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed
-    risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor
-    vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus
-    non. Amet dictum sit amet justo donec enim.
-  </p>
-
-  <p>
-    Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac
-    ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem
-    viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu
-    ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac
-    tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-    pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim
-    sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam.
-    Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
-  </p>
-
-  <p>
-    Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus
-    imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu
-    cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum.
-    Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit
-    libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed
-    pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique
-    magna.
+    If for some reason you want to contact me, you have a few options
+    available, i won't mind if you just want to say hello!
+    <ul>
+      <li>My beautiful Discord: @chiwabox</li>
+      <li>My Email: chiwuabox@gmail.com</li>
+      <li>
+        And my... <a href="https://x.com/ChiwuaB">twitter?...</a> i dont really use
+        this one but... there it is!
+      </li>
+    </ul>
   </p>
 </Layout>

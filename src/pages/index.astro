@@ -3,6 +3,25 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+
+const birth = new Date(2005, 0o7, 17);
+const today = new Date();
+let age = 0;
+if (today.getMonth() > 0o7) {
+  age = today.getFullYear() - birth.getFullYear();
+} else {
+  age = today.getFullYear() - birth.getFullYear() - 1;
+}
+let post: any = null;
+let postsExist = false;
+const posts = await getCollection("blog");
+if (posts) {
+  posts.sort((a: any, b: any) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+  post = posts[posts.length - 1];
+  postsExist = true;
+}
 ---
 
 <!doctype html>
@@ -21,6 +40,60 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         where i document things i find helpful or relevant to what i'm working on
         or doing at the moment.
       </p>
+      <br />
+      <h3>A little bit about me</h3>
+      <p>
+        I'm a {age}-year-old guy from Argentina who loves computers since a
+        young age, i developed a fascination for videogames and how they were
+        made by the insides, so i started exploring this huge world by myself. <br
+        />
+        I like many things like cats, anime, videogames, coding (ofcourse) and funny
+        stuff... <br />
+        You can find more about me in <a href="/about">here</a> if you are curious!
+      </p>
+      <br />
+      <h3>What is this blog about?</h3>
+      <p>
+        So, this is just a website to let myself show my advancements into what
+        i like, things i like, or simply projects i might be working on, have a
+        look if you want, perhaps i will update this blog with more sections and
+        stuff, but for now, this is all!
+        <br />
+        <br />
+        I'm not quite a poethic guy, but a phrase has been always stuck with me is
+        the following:
+        <br />
+        <br />
+        <i
+          >"Only the unknown frightens men. But once a man has faced the
+          unknown, that terror becomes familiar."</i
+        >
+        <br />
+        <br />
+      </p>
+      {
+        post ? (
+          <>
+            <p>
+              Anyways, here is the latest blog i have worked on, just for you ;)
+            </p>
+            <div style="border-style: solid; border-radius: 8px; background:rgba(var(--background-color), 50%);">
+              <a
+                href={`/blog/${post.slug}/`}
+                style="text-decoration: none; padding: 1em; display: block;"
+              >
+                <h4 class="title">{post.data.title}</h4>
+                <p class="date">
+                  <FormattedDate date={post.data.pubDate} />
+                </p>
+                <p class="description">{post.data.description}</p>
+              </a>
+            </div>
+          </>
+        ) : (
+          <h3>see you later, alligator!</h3>
+        )
+      }
     </main>
     <Footer />
   </body>
