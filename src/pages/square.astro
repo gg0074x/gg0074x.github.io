@@ -1,0 +1,62 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="The Square O_o" description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main
+      style="border: none; background: transparent; display: grid; justify-items: center; flex-direction: column;"
+    >
+      <div id="square"></div>
+      <input
+        id="input"
+        type="text"
+        placeholder="Background color or border radius :3"
+      />
+    </main>
+    <Footer />
+    <style>
+      #square {
+        border: 4px var(--font-color);
+        border-style: solid;
+        height: 18em;
+        width: 18em;
+        margin: 20px;
+        transition: ease-in-out 0.5s;
+      }
+      input {
+        border: 3px var(--font-color);
+        background-color: var(--code);
+        border-radius: 0.6em;
+        min-width: 18em;
+        min-height: 2em;
+        border-style: solid;
+        font-weight: bold;
+        font-size: 18px;
+        color: var(--font-color);
+      }
+      input:focus {
+        outline: none;
+      }
+    </style>
+    <script>
+      let input = document.querySelector("input");
+      let square = document.getElementById("square");
+      if (input)
+        input.addEventListener("input", () => {
+          if (square) {
+            square.style.background = input.value;
+            square.style.borderRadius = input.value;
+          }
+        });
+    </script>
+  </body>
+</html>
