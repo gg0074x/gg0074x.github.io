@@ -1,0 +1,124 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+let theday = new Date(1710138840 * 1000);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="<3" description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main
+      style="border: none; background: var(--code); display: grid; justify-items: center; flex-direction: column; box-shadow: none;"
+    >
+      <h1>Together since...</h1>
+      <h4>
+        {
+          theday.toLocaleDateString("en-us", {
+            weekday: "long",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          })
+        }
+      </h4>
+      <div class="spacer"></div>
+      <h4>or</h4>
+      <div class="spacer"></div>
+      <h2 id="days"></h2>
+      <div class="spacer"></div>
+      <h2 id="hours"></h2>
+      <div class="spacer"></div>
+      <h2 id="minutes"></h2>
+      <div class="spacer"></div>
+      <h2 id="seconds"></h2>
+      <div class="spacer"></div>
+      <div id="heart"></div>
+      <div class="spacer"></div>
+      <style>
+        .spacer {
+          height: 5rem;
+        }
+        h2,
+        h4,
+        h1,
+        h5 {
+          text-align: center;
+          font-family: "Helvetica", "Arial", sans-serif;
+        }
+        #heart {
+          position: relative;
+          width: 100px;
+          height: 90px;
+          margin-top: 10px;
+        }
+
+        #heart::before,
+        #heart::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: 52px;
+          height: 80px;
+          border-radius: 50px 50px 0 0;
+          background: rgb(var(--black));
+        }
+
+        #heart::before {
+          left: 50px;
+          transform: rotate(-45deg);
+          transform-origin: 0 100%;
+        }
+
+        #heart::after {
+          left: 0;
+          transform: rotate(45deg);
+          transform-origin: 100% 100%;
+        }
+      </style>
+      <script>
+        const daystag = document.getElementById("days");
+        const hourstag = document.getElementById("hours");
+        const minutestag = document.getElementById("minutes");
+        const secondstag = document.getElementById("seconds");
+        const words = ["amazing", "lovely", "wonderful", "unique"];
+        let shuffled = words.sort(() => Math.random() - 0.5);
+
+        let theday = new Date(1710138840 * 1000);
+        function getElapsedTimeSinceMyLove() {
+          let now = new Date();
+          let elapsed = now.valueOf() - theday.valueOf();
+          return elapsed;
+        }
+
+        function dhm(ms) {
+          const days = Math.floor(ms / (24 * 60 * 60 * 1000));
+          const hours = Math.floor(ms / (60 * 60 * 1000));
+          const minutes = Math.floor(ms / (60 * 1000));
+          const sec = Math.floor(ms / 1000);
+          let list = [days, hours, minutes, sec];
+          return list;
+        }
+
+        setInterval(function () {
+          let elapsed = getElapsedTimeSinceMyLove();
+          let [days, hours, minutes, seconds] = dhm(elapsed);
+
+          if (daystag && hourstag && minutestag && secondstag) {
+            daystag.textContent = `${days} ${shuffled[0]} days`;
+            hourstag.textContent = `${hours} ${shuffled[1]} hours`;
+            minutestag.textContent = `${minutes} ${shuffled[2]} minutes`;
+            secondstag.textContent = `${seconds} ${shuffled[3]} seconds`;
+          }
+        }, 1000);
+      </script>
+    </main>
+  </body>
+</html>
