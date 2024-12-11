@@ -210,7 +210,7 @@ h2 {
 
 a {
   display: inline-block;
-  width: min-content;
+  width: max-content;
   font-size: 3rem;
   font-weight: bolder;
   text-decoration: none;

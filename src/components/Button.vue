@@ -52,7 +52,6 @@ a {
 
 .description {
   transition: ease-in-out 0.3s;
-  transition-delay: 0.2s;
   opacity: 0;
   max-height: 0;
   font-size: small;

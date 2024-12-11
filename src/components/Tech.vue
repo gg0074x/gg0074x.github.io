@@ -1,13 +1,24 @@
 <script setup lang="ts">
+import { ref } from "vue";
+
 defineProps<{
-  title: string,
+  title: string;
 }>();
+
+const egg = ref(false);
+
+function setEmoji(title: string) {
+  if (title === "Rust") {
+    egg.value = !egg.value;
+  }
+  console.log(egg.value);
+}
 </script>
 
 <template>
   <div class="tech-container">
     <span class="dot"></span>
-    <p>{{ title }}</p>
+    <p :class="egg ? 'emoji' : ''" @mousedown="setEmoji(title)">{{ title }}</p>
   </div>
 </template>
 
@@ -19,7 +30,7 @@ defineProps<{
   border-radius: 50%;
   display: inline-block;
 }
-.tech-container{
+.tech-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,5 +45,8 @@ defineProps<{
 }
 .vue .dot {
   background-color: rgb(var(--vue));
+}
+.emoji:after {
+  content: " 🦀";
 }
 </style>
