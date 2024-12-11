@@ -1,35 +1,106 @@
-<script setup lang="ts">
+<script>
+import { ref, onMounted } from "vue";
 import Button from "./components/Button.vue";
+import Tech from "./components/Tech.vue";
+
+export default {
+  components: {
+    Button,
+    Tech,
+  },
+  data() {
+    return {
+      repos: [],
+      techUsage: {},
+      color: "000000",
+    };
+  },
+  computed: {
+    sortedTechs() {
+      return Object.fromEntries(
+        Object.entries(this.techUsage).sort(([, a], [, b]) => b - a)
+      );
+    },
+  },
+  methods: {
+    formatTitle(repo) {
+      return repo.fork ? `Forked | ${repo.name}` : repo.name;
+    },
+    getRandomColor() {
+      let output = "#";
+      for (let i = 0; i < 6; ++i) {
+        output += Math.floor(Math.random() * 16).toString(16);
+      }
+      return output;
+    },
+    changeColor() {
+      this.color = this.getRandomColor();
+    },
+  },
+  async mounted() {
+    try {
+      const response = await fetch(
+        "https://api.github.com/users/gg0074x/repos"
+      );
+      if (!response.ok) throw new Error("Failed to fetch repos");
+      this.repos = await response.json();
+
+      this.repos.forEach((repo) => {
+        const lang = repo.language || "Unknown";
+        if (!this.techUsage[lang]) this.techUsage[lang] = 0;
+        this.techUsage[lang]++;
+      });
+
+      this.color = this.getRandomColor();
+    } catch (error) {
+      console.error(error);
+    }
+  },
+};
 </script>
 
 <template>
   <main>
     <div class="container">
       <div class="small-div">
-        <h2>Projects</h2>
-        <div class="projects-div">
-          <Button
-            title="gg0074x/no-compiler"
-            url="https://www.github.com/gg0074x/no-compiler"
-            description="A no compiler to compile binary code directly"
-          ></Button>
-          <Button
-            title="gg0074x/ask-cli"
-            url="https://www.github.com/gg0074x/ask-cli"
-            description="A simple command line tool to use Google Gemini AI"
-          ></Button>
-          <Button
-            title="gg0074x/pawwssword_gen"
-            url="https://www.github.com/gg0074x/pawwssword_gen"
-            description="A tiny command line tool to generate new randomized passwords with a fun touch"
-          ></Button>
+        <div class="list">
+          <h2>Techs</h2>
+          <div class="tech-div">
+            <Tech
+              v-for="(count, tech) in sortedTechs"
+              :class="tech.toLowerCase()"
+              :title="tech"
+            ></Tech>
+          </div>
+        </div>
+        <div class="list">
+          <h2>Projects</h2>
+          <div class="projects-div">
+            <Button
+              v-for="repo in repos"
+              :class="repo.language ? repo.language.toLowerCase() : 'unknown'"
+              :title="formatTitle(repo)"
+              :url="repo.html_url"
+              :description="repo.description || 'No description available.'"
+            ></Button>
+          </div>
         </div>
       </div>
       <div class="large-div">
         <div class="profile-container">
-          <img src="./assets/chiwa.png" class="pfp" />
+          <img
+            src="https://avatars.githubusercontent.com/gg0074x"
+            class="pfp"
+          />
           <div>
-            <a href="https://www.github.com/gg0074x" target="_blank"> Chiwa </a>
+            <a
+              href="https://www.github.com/gg0074x"
+              target="_blank"
+              :style="{ '--random-color': color }"
+              @mouseover="changeColor()"
+            >
+              Chiwa
+            </a>
             <p>
               I'm a 19 year old hobbyist developer and computer engineering
               student.
@@ -53,13 +124,23 @@ import Button from "./components/Button.vue";
   margin: 0;
 }
 .small-div {
-  flex: 1;
+  flex: 1.2;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   padding: 2%;
+  gap: 4%;
 }
+
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
 .large-div {
   flex: 3;
   display: flex;
@@ -87,8 +168,39 @@ import Button from "./components/Button.vue";
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2% 0%;
   width: 100%;
-  gap: 8%;
+  overflow-y: auto;
+}
+
+.projects-div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projects-div::-webkit-scrollbar-thumb {
+}
+
+.projects-div::-webkit-scrollbar-thumb:hover {
+}
+
+.tech-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 0%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.tech-div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tech-div::-webkit-scrollbar-thumb {
+}
+
+.tech-div::-webkit-scrollbar-thumb:hover {
 }
 
 h2 {
@@ -106,7 +218,73 @@ a {
   transition: ease-in-out 0.25s;
 }
 a:hover {
-  transform: scale(1.1);
   text-decoration: underline;
+}
+
+a {
+  position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  &:before {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    background: var(--random-color);
+    height: 70%;
+    left: 0;
+    bottom: 10%;
+    width: 0%;
+    opacity: 0.7;
+    transition: all 0.5s;
+  }
+
+  &:hover:before {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .pfp {
+    width: 25%;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    border: solid 2px var(--color-border);
+  }
+
+  .container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100vh;
+    margin: 0;
+    overflow: auto;
+  }
+  .profile-container {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4%;
+  }
+  .projects-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 0%;
+    width: 100%;
+    overflow-y: visible;
+  }
+
+  .tech-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 0%;
+    width: 100%;
+    overflow-y: visible;
+  }
 }
 </style>

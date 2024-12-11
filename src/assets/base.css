@@ -10,8 +10,13 @@
 
   --vt-c-text-light-1: var(--vt-c-black);
   --vt-c-text-light-2: rgba(0, 0, 0, 0.8);
+  --vt-c-text-light-3: rgba(0, 0, 0, 0.5);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.8);
+  --vt-c-text-dark-3: rgba(235, 235, 235, 0.5);
+
+  --rust: 255, 94, 0;
+  --vue: 0, 255, 98;
 }
 
 /* semantic color variables for this project */
@@ -24,6 +29,7 @@
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-2);
+  --color-text-dimmed: var(--vt-c-text-light-3)
 
   --section-gap: 160px;
 }
@@ -38,6 +44,7 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+    --color-text-dimmed: var(--vt-c-text-dark-3)
   }
 }
 

@@ -1,14 +1,14 @@
 <script setup lang="ts">
 defineProps<{
-  title: string,
-  url: string,
-  description: string
+  title: string;
+  url: string;
+  description: string;
 }>();
 </script>
 
 <template>
   <div class="button-container">
-    <a :href=url target="_blank">
+    <a :href="url" target="_blank">
       <p>{{ title }}</p>
       <span class="description">{{ description }}</span>
     </a>
@@ -16,31 +16,31 @@ defineProps<{
 </template>
 
 <style scoped>
-.button-container{
+.button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 80%;
   min-width: 80%;
   max-width: 80%;
-  transition: ease-in-out 0.25s;
+  transition: ease-in-out 0.1s;
   border-radius: 8px;
   padding: 1.5% 0;
-  overflow: hidden;
+  margin: 2% 0;
 }
 
-.button-container:hover{
+.button-container:hover {
   transform: scale(1.1);
   background-color: var(--color-background-mute);
 }
 
-.button-container:hover .description{
+.button-container:hover .description {
   opacity: 1;
   margin: 2% 4%;
-  max-height: 200px
+  max-height: 200px;
 }
 
-a{
+a {
   width: 100%;
   height: 100%;
   display: flex;
@@ -50,11 +50,34 @@ a{
   text-decoration: none;
 }
 
-.description{
-  transition: ease-in-out 0.5s;
-  transition-delay: 0.7s;
+.description {
+  transition: ease-in-out 0.3s;
+  transition-delay: 0.2s;
   opacity: 0;
   max-height: 0;
   font-size: small;
+  color: var(--color-text-dimmed);
+}
+
+/* LANGUAGE CLASSES OR SOMETHING */
+.rust:hover {
+  background-color: rgba(var(--rust), 0.2);
+}
+.vue:hover {
+  background-color: rgba(var(--vue), 0.2);
+}
+
+@media (max-width: 1024px) {
+  .description {
+    opacity: 1;
+    max-height: 100px;
+    font-size: small;
+    margin: 0% 2%;
+    color: var(--color-text-dimmed);
+  }
+  .button-container:hover .description {
+    margin: 0% 2%;
+    max-height: 200px;
+  }
 }
 </style>
