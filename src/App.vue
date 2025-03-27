@@ -1,7 +1,33 @@
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 import Button from "./components/Button.vue";
 import Tech from "./components/Tech.vue";
+
+let square = ref(null);
+let grabbing = ref(false);
+let rotation = ref(0);
+let x = 0;
+let y = 0;
+let mousex = 0;
+let mousey = 0;
+let initialAngle = 0;
+let startRotation = 0;
+const friction = 0.98;
+let angularVelocity = 0;
+let lastAngle = 0;
+
+function degrees(angleInRadians) {
+  return angleInRadians * (180 / Math.PI);
+}
+
+function applyMomentum() {
+  if (!grabbing.value && Math.abs(angularVelocity) > 0.01) {
+    rotation.value += angularVelocity;
+    angularVelocity *= friction;
+
+    requestAnimationFrame(applyMomentum);
+  }
+}
 
 export default {
   components: {
@@ -21,6 +47,9 @@ export default {
         Object.entries(this.techUsage).sort(([, a], [, b]) => b - a)
       );
     },
+    style() {
+      return { transform: "rotate(" + rotation.value + "deg)" };
+    },
   },
   methods: {
     formatTitle(repo) {
@@ -36,17 +65,63 @@ export default {
     changeColor() {
       this.color = this.getRandomColor();
     },
+    onSquarePointerDown(event) {
+      var bodyRect = document.body.getBoundingClientRect();
+      var elemRect = square.value.getBoundingClientRect();
+      x = elemRect.left - bodyRect.left + elemRect.width / 2;
+      y = elemRect.top - bodyRect.top + elemRect.height / 2;
+
+      let dx = x - event.clientX;
+      let dy = event.clientY - y;
+
+      initialAngle = degrees(Math.atan2(-dy, dx));
+      if (initialAngle < 0) initialAngle += 360;
+
+      startRotation = rotation.value;
+
+      grabbing.value = true;
+    },
+    onSquarePointerUp() {
+      grabbing.value = false;
+      applyMomentum();
+    },
   },
+
   async mounted() {
+    square.value = document.getElementById("square");
+    addEventListener("mouseup", this.onSquarePointerUp);
+    addEventListener("mousemove", (event) => {
+      if (square.value == undefined) {
+        return;
+      }
+      mousex = event.clientX;
+      mousey = event.clientY;
+      if (grabbing.value) {
+        let dx = x - mousex;
+        let dy = mousey - y;
+
+        let angle = degrees(Math.atan2(-dy, dx));
+        if (angle < 0) {
+          angle += 360;
+        }
+
+        let delta = angle - initialAngle;
+
+        angularVelocity = angle - lastAngle;
+        lastAngle = angle;
+        rotation.value = startRotation + delta;
+      }
+    });
     try {
-      const response = await fetch(
-        "https://api.github.com/users/gg0074x/repos"
-      );
+      const response = await fetch("https://api.github.com/users/gg0074x/repos");
       if (!response.ok) throw new Error("Failed to fetch repos");
       this.repos = await response.json();
 
       this.repos.forEach((repo) => {
-        const lang = repo.language || "Unknown";
+        const lang = repo.language;
+        if (lang == null) {
+          return;
+        }
         if (!this.techUsage[lang]) this.techUsage[lang] = 0;
         this.techUsage[lang]++;
       });
@@ -60,6 +135,15 @@ export default {
 </script>
 
 <template>
+  <header>
+    <div
+      id="square"
+      class="square"
+      :style="style"
+      @pointerdown="onSquarePointerDown($event)"
+      @pointerup="onSquarePointerUp()"
+    ></div>
+  </header>
   <main>
     <div class="container">
       <div class="small-div">
@@ -117,20 +201,47 @@ export default {
 </template>
 
 <style scoped>
+.square {
+  height: 40px;
+  width: 40px;
+  aspect-ratio: 1;
+  background-color: white;
+  cursor: grab;
+  transition: border-radius ease-in-out 0.3s;
+}
+.square:hover {
+  border-radius: 8px;
+}
+
+main {
+  width: 100vw;
+  overflow: hidden;
+}
+header {
+  width: 100vw;
+  max-height: 60px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   width: 100vw;
   display: flex;
   height: 100vh;
   margin: 0;
+  bottom: 76px;
 }
 .small-div {
+  height: 100vh;
   flex: 1.2;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   padding: 2%;
-  gap: 4%;
+  gap: 8%;
 }
 
 .list {
@@ -147,6 +258,7 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 10%;
+  padding-top: 2%;
 }
 
 .profile-container {
@@ -204,15 +316,15 @@ export default {
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: bolder;
+  font-size: 1.9rem;
+  font-weight: bold;
 }
 
 a {
   display: inline-block;
   width: max-content;
   font-size: 3rem;
-  font-weight: bolder;
+  font-weight: 100;
   text-decoration: none;
   color: var(--color-heading);
   transition: ease-in-out 0.25s;
@@ -256,9 +368,10 @@ a {
     width: 100vw;
     display: flex;
     flex-direction: column-reverse;
-    height: 100vh;
+    height: max-content;
     margin: 0;
-    overflow: auto;
+    overflow: visible;
+    gap: 6%;
   }
   .profile-container {
     display: inline-flex;
