@@ -214,12 +214,12 @@ export default {
 }
 
 main {
+  height: calc(100vh - calc(16px + 16px + 40px));
   width: 100vw;
   overflow: hidden;
 }
 header {
   width: 100vw;
-  max-height: 60px;
   padding: 16px;
   display: flex;
   justify-content: center;
@@ -229,12 +229,12 @@ header {
 .container {
   width: 100vw;
   display: flex;
-  height: 100vh;
+  height: 100%;
   margin: 0;
   bottom: 76px;
 }
 .small-div {
-  height: 100vh;
+  height: 100%;
   flex: 1.2;
   display: flex;
   align-items: center;
@@ -357,6 +357,10 @@ a {
 }
 
 @media (max-width: 1024px) {
+  main {
+    height: max-content;
+    overflow: visible;
+  }
   .pfp {
     width: 25%;
     aspect-ratio: 1;
@@ -365,6 +369,7 @@ a {
   }
 
   .container {
+    height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column-reverse;

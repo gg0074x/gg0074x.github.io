@@ -17,6 +17,11 @@
 
   --rust: 255, 94, 0;
   --vue: 0, 255, 98;
+  --go: 3, 182, 252;
+  --js: 252, 227, 3;
+  --ts: 30, 114, 250;
+  --kotlin: 140, 44, 219;
+  --c: 50, 85, 122;
 }
 
 /* semantic color variables for this project */
