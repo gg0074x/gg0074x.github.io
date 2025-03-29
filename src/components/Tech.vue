@@ -46,6 +46,21 @@ function setEmoji(title: string) {
 .vue .dot {
   background-color: rgb(var(--vue));
 }
+.go .dot {
+  background-color: rgb(var(--go));
+}
+.javascript .dot {
+  background-color: rgb(var(--js));
+}
+.typescript .dot {
+  background-color: rgb(var(--ts));
+}
+.kotlin .dot {
+  background-color: rgb(var(--kotlin));
+}
+.c .dot {
+  background-color: rgb(var(--c));
+}
 .emoji:after {
   content: " 🦀";
 }

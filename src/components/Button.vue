@@ -65,6 +65,21 @@ a {
 .vue:hover {
   background-color: rgba(var(--vue), 0.2);
 }
+.go:hover {
+  background-color: rgba(var(--go), 0.2);
+}
+.javascript:hover {
+  background-color: rgba(var(--js), 0.2);
+}
+.typescript:hover {
+  background-color: rgba(var(--ts), 0.2);
+}
+.kotlin:hover {
+  background-color: rgba(var(--kotlin), 0.2);
+}
+.c:hover {
+  background-color: rgba(var(--c), 0.2);
+}
 
 @media (max-width: 1024px) {
   .description {
