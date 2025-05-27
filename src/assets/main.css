@@ -1,24 +1,21 @@
 @import "./base.css";
 
-#app {
-  margin: 0;
-  padding: 0;
-  font-weight: 100;
-  width: 100vw;
-  height: 100vh;
-  overflow: visible;
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+html {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
 
-  #app {
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
-    overflow: hidden;
-  }
+body {
+    background-color: var(--color-background);
+    overflow-x: hidden;
+    overflow-y: hidden;
 }

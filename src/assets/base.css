@@ -1,114 +1,44 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #dddddd;
-
-  --vt-c-black: #000000;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-text-light-1: var(--vt-c-black);
-  --vt-c-text-light-2: rgba(0, 0, 0, 0.8);
-  --vt-c-text-light-3: rgba(0, 0, 0, 0.5);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.8);
-  --vt-c-text-dark-3: rgba(235, 235, 235, 0.5);
-
-  --rust: 255, 94, 0;
-  --vue: 0, 255, 98;
-  --go: 3, 182, 252;
-  --js: 252, 227, 3;
-  --ts: 30, 114, 250;
-  --kotlin: 140, 44, 219;
-  --c: 50, 85, 122;
+    --black: #000000;
+    --white: #ffffff;
+    --white-rgb: 255, 255, 255;
+    --black-rgb: 0, 0, 0;
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-text-light-2);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-2);
-  --color-text-dimmed: var(--vt-c-text-light-3)
-
-  --section-gap: 160px;
+    --color-background: var(--white);
+    --color-background-rgb: var(--white-rgb);
+    --on-background: var(--black);
+    --on-background-rgb: var(--black-rgb);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-text-dark-2);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-    --color-text-dimmed: var(--vt-c-text-dark-3)
-  }
-}
-
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
-}
-
-h1,h2,h3,h4,h5,h6{
-  color: var(--color-heading);
-  -webkit-user-select: none;      
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-}
-
-a,p{
-  color: var(--color-text);
-  -webkit-user-select: none;    
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    :root {
+        --color-background: var(--black);
+        --color-background-rgb: var(--black-rgb);
+        --on-background: var(--white);
+        --on-background-rgb: var(--white-rgb);
+    }
 }
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('./Satoshi-Regular.woff') format('woff');
-  font-weight: 100;
+    font-family: "Satoshi";
+    src: url("./Satoshi-Regular.woff") format("woff");
 }
 
-body {
-  min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Satoshi,
-    Roboto,
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 16px;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+    font-family: "NotoJP";
+    src: url("./NotoSansJP-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "DelaGothicOne";
+    src: url("./DelaGothicOne-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "InconsolataMono";
+    src: url("./Inconsolata_Expanded-SemiBold.ttf") format("truetype");
 }
