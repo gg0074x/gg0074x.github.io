@@ -18,7 +18,7 @@
 }
 
 .loader {
-    background-color: white;
+    background-color: var(--on-background);
     animation: load 2s 0s infinite ease-in-out;
     width: 64px;
     aspect-ratio: 1;

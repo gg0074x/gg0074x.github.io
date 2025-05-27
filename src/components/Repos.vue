@@ -121,6 +121,18 @@ a.clickonme {
     flex-direction: column;
 }
 
+@media only screen and (max-width: 1600px) {
+    .repos-container {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .repos-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .repos-container {
         display: flex;
