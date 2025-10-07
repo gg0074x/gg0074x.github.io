@@ -275,11 +275,26 @@ main {
 
 @media only screen and (max-width: 600px) {
     .code {
+        display: none;
         align-items: unset;
         overflow: scroll;
         text-wrap: nowrap;
         padding: 2rem;
     }
+
+    .selected {
+        background-color: rgba(var(--color-background-rgb), 20%);
+        color: var(--on-background);
+    }
+
+    .selected a:hover {
+        color: var(--color-background);
+    }
+
+    .selected a {
+        color: var(--on-background);
+    }
+
     :deep(span) {
         font-size: 6vw;
         text-wrap: nowrap;
@@ -289,7 +304,7 @@ main {
     }
 
     .selector {
-        width: 20%;
+        width: 100%;
     }
 
     li {

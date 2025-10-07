@@ -139,23 +139,24 @@ a.clickonme {
 }
 
 @media only screen and (max-width: 600px) {
+    .repo-card {
+        width: 90%;
+    }
+
     .repos-container {
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
         overflow: visible;
-        width: 90%;
     }
 }
 
 @media only screen and (max-width: 992px) and (min-width: 600px) {
+    .repo-card {
+        width: 90%;
+    }
     .repos-container {
-        display: flex;
-        flex-direction: column;
-
-        overflow-x: hidden;
-        overflow: visible;
-        width: 50%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 </style>
