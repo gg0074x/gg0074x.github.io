@@ -6,7 +6,12 @@ const props = defineProps(["repos", "reposLangs"]);
 
 const error = ref(false);
 
-if (!props.repos || !props.reposLangs || !props.reposLangs[0]) {
+if (
+    !props.repos ||
+    !props.reposLangs ||
+    !props.reposLangs[0] ||
+    props.repos.value == "No Repos"
+) {
     error.value = true;
 }
 </script>
@@ -18,7 +23,6 @@ if (!props.repos || !props.reposLangs || !props.reposLangs[0]) {
             <div class="repo-card" v-for="(repo, index) in props.repos">
                 <a class="clickonme" :href="repo['html_url']" target="_blank">
                     <h2 class="repo-name">{{ repo["name"] }}</h2>
-                    <h3 v-if="repo['fork']">Forked</h3>
                     <p class="description">{{ repo["description"] }}</p>
                     <div class="langs">
                         <p
@@ -50,6 +54,7 @@ if (!props.repos || !props.reposLangs || !props.reposLangs[0]) {
 }
 
 .repo-card {
+    background-color: var(--color-background);
     display: flex;
     flex-direction: column;
     aspect-ratio: 0.8;
@@ -137,9 +142,8 @@ a.clickonme {
     .repos-container {
         display: flex;
         flex-direction: column;
-        max-height: 60vh;
         overflow-x: hidden;
-        overflow: scroll;
+        overflow: visible;
         width: 90%;
     }
 }
@@ -148,9 +152,9 @@ a.clickonme {
     .repos-container {
         display: flex;
         flex-direction: column;
-        max-height: 60vh;
+
         overflow-x: hidden;
-        overflow: scroll;
+        overflow: visible;
         width: 50%;
     }
 }

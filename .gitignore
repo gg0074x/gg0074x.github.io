@@ -27,3 +27,5 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+get_music_playlist.nu

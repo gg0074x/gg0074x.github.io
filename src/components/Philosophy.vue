@@ -32,6 +32,7 @@ export default {
 
 <style scoped>
 .phil-container {
+    background-color: var(--color-background);
     color: var(--on-background);
     display: flex;
     justify-content: center;

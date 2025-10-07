@@ -1,4 +1,5 @@
 @import "./base.css";
+@import "@splidejs/vue-splide/css";
 
 body,
 html {

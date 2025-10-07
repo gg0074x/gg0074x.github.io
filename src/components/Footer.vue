@@ -18,6 +18,7 @@
 
 <style scoped>
 .footer-container {
+    background-color: var(--color-background);
     display: flex;
     flex-direction: column;
     width: 100vw;

@@ -131,6 +131,7 @@ h2 {
 }
 
 .selector {
+    background-color: rgba(var(--color-background-rgb), 20%);
     width: 13%;
     height: max-content;
     margin: 0;
@@ -197,6 +198,7 @@ a:hover {
 }
 
 .code {
+    background-color: var(--color-background);
     height: 100%;
     width: 75%;
     color: var(--on-background);
@@ -207,7 +209,8 @@ a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-weight: 300;
+    font-weight: 600;
+    font-feature-settings: "ss01";
 }
 
 main {
@@ -227,7 +230,7 @@ main {
 }
 
 :deep(span) {
-    font-family: InconsolataMono;
+    font-family: CascadiaCodeItalic;
 }
 
 :deep(.keyword) {

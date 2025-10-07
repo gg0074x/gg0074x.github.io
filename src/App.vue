@@ -10,6 +10,7 @@ import Music from "./components/Music.vue";
 import Repos from "./components/Repos.vue";
 import Error from "./components/Error.vue";
 import Footer from "./components/Footer.vue";
+import Background from "./components/Background.vue";
 
 const error = ref(false);
 
@@ -42,24 +43,33 @@ onMounted(async () => {
         let repoResponse = await fetch(
             "https://api.github.com/users/gg0074x/repos",
         );
-        repos.value = await repoResponse.json();
+        if (repoResponse.ok) {
+            repos.value = await repoResponse.json();
+            repos.value = repos.value.filter((repo) => repo["fork"] == false);
 
-        let repoLangArray = new Array();
-        for (let i = 0; i < repos.value.length; i++) {
-            let langResponse = await fetch(repos.value[i]["languages_url"]);
-            let langJson = await langResponse.json();
-            repoLangArray.push(langJson);
+            let repoLangArray = new Array();
+            for (let i = 0; i < repos.value.length; i++) {
+                let langResponse = await fetch(repos.value[i]["languages_url"]);
+                if (langResponse.ok) {
+                    let langJson = await langResponse.json();
+                    repoLangArray.push(langJson);
+                }
+            }
+            repoLangs.value = repoLangArray;
+        } else {
+            repos.value = "No Repos";
         }
-        repoLangs.value = repoLangArray;
 
         if (firstTime) {
             await new Promise((r) => setTimeout(r, 2500));
             localStorage.setItem("firstTime", false);
         }
+
         loading.value = false;
     } catch (e) {
         error.value = true;
-        console.error("Image failed to load", e);
+        console.error(e);
+        loading.value = false;
     }
 });
 </script>
@@ -74,6 +84,7 @@ onMounted(async () => {
                 <Error />
             </div>
             <div v-else>
+                <Background />
                 <Greet :imgSrc="imgUrl" />
                 <Philosophy />
                 <Presentation />

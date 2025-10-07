@@ -25,20 +25,26 @@
 
 @font-face {
     font-family: "Satoshi";
-    src: url("./Satoshi-Regular.woff") format("woff");
+    src: url("/fonts/Satoshi-Regular.woff") format("woff");
 }
 
 @font-face {
     font-family: "NotoJP";
-    src: url("./NotoSansJP-Regular.ttf") format("truetype");
+    src: url("/fonts/NotoSansJP-Regular.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "DelaGothicOne";
-    src: url("./DelaGothicOne-Regular.ttf") format("truetype");
+    src: url("/fonts/DelaGothicOne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "InconsolataMono";
-    src: url("./Inconsolata_Expanded-SemiBold.ttf") format("truetype");
+    font-family: "CascadiaCode";
+    src: url("/fonts/CascadiaCode-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "CascadiaCodeItalic";
+    src: url("/fonts/CascadiaCode-Italic-VariableFont_wght.ttf")
+        format("truetype");
 }
