@@ -1,23 +1,68 @@
+---
+import Header from "../components/Header.astro";
+import "../styles/global.css";
+import "mingcute_icon/font/Mingcute.css";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>chiwa</title>
+    </head>
+    <body>
+        <Header />
+        <slot />
+    </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+    @property --color-fg {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #000000;
+    }
+
+    @property --color-bg {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #ffffff;
+    }
+
+    @property --color-accent {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #ff4000;
+    }
+
+    *,
+    *::before,
+    *::after {
+        cursor:
+            url("cursor.svg") 10 10,
+            auto;
+
+        transition:
+            --color-fg 0.3s ease,
+            --color-bg 0.3s ease,
+            --color-accent 0.3s ease;
+    }
+
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        overflow-x: hidden;
+        background-color: var(--color-bg);
+        color: var(--color-fg);
+        font-family: var(--font-sans);
+    }
 </style>

@@ -1,0 +1,53 @@
+---
+interface Props {
+    icon: string;
+    color: string;
+    url: string | null;
+    tooltip: string;
+}
+const { icon, color, url, tooltip } = Astro.props;
+---
+
+<div id="icon" class="flex relative flex-col justify-center items-center">
+    <a href={url} target="_blank" rel="noopener noreferrer">
+        <span class={`${icon} text-3xl text-${color}`}></span>
+    </a>
+    <div
+        class="tooltip flex flex-col justify-center items-center absolute top-full"
+    >
+        <span class="triangle"> </span>
+        <span
+            class="px-4 bg-(--color-fg) rounded-full text-lg text-(--color-bg) min-w-16 flex justify-center items-center"
+            >{tooltip}</span
+        >
+    </div>
+</div>
+
+<style>
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid var(--color-fg);
+    }
+
+    .tooltip {
+        opacity: 0;
+        translate: 0 -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition:
+            opacity 0.15s ease,
+            translate 0.15s ease;
+    }
+
+    #icon {
+        display: inline-block;
+    }
+
+    #icon:hover .tooltip {
+        opacity: 1;
+        translate: 0 0px;
+    }
+</style>

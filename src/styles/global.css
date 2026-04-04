@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "UbuntuMono";
+    src: url("/fonts/UbuntuMono.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RethinkSans";
+    src: url("/fonts/RethinkSans.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Prata";
+    src: url("/fonts/Prata.ttf") format("truetype");
+}
+
+@import "tailwindcss";
+
+::-moz-selection {
+    color: var(--color-bg);
+    background: var(--color-accent);
+}
+
+::selection {
+    color: var(--color-bg);
+    background: var(--color-accent);
+}
+
+[class^="mgc_"]::before,
+[class*=" mgc_"]::before {
+    color: inherit !important;
+}
+
+*:hover,
+*:active {
+    cursor:
+        url("cursor.svg") 10 10,
+        auto;
+}
+
+@theme {
+    --font-sans: "RethinkSans";
+    --font-serif: "Prata";
+    --font-mono: "UbuntuMono";
+}

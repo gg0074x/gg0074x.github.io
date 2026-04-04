@@ -1,0 +1,57 @@
+---
+import SocialIcon from "../components/SocialIcon.astro";
+
+interface Props {
+    image: string;
+}
+const { image } = Astro.props;
+---
+
+<div id="container" class="w-full h-screen">
+    <section
+        id="me"
+        class="size-full justify-center items-center flex flex-col gap-8"
+    >
+        <div
+            class="flex flex-col lg:flex-row w-full justify-start items-center gap-8"
+        >
+            <img
+                class="w-48 aspect-square rounded-full border-solid border border-(--color-fg)"
+                src={image}
+            />
+            <div class="flex flex-col gap-4">
+                <h1 class="text-4xl md:text-6xl font-bold">
+                    Hello! I'm <span class="text-(--color-accent)">Chiwa</span>!
+                </h1>
+                <div
+                    class="flex px-4 py-1 border-solid border border-(--color-fg)/50 rounded-full w-min gap-6"
+                >
+                    <SocialIcon
+                        icon="mgc_discord_fill"
+                        color="blue-700"
+                        url="https://discord.com"
+                        tooltip="@chiwabox"
+                    />
+                    <SocialIcon
+                        icon="mgc_youtube_fill"
+                        color="red-600"
+                        url="https://www.youtube.com/@chiwabox"
+                        tooltip="Youtube"
+                    />
+                    <SocialIcon
+                        icon="mgc_github_fill"
+                        color="(--color-fg)"
+                        url="https://github.com/gg0074x"
+                        tooltip="Github"
+                    />
+                    <SocialIcon
+                        icon="mgc_social_x_line"
+                        color="(--color-fg)"
+                        url="https://x.com/ChiwuaB"
+                        tooltip="X"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

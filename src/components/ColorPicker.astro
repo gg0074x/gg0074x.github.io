@@ -1,0 +1,33 @@
+---
+interface Props {
+    text: string;
+    placeholder: string;
+}
+const { text, placeholder } = Astro.props;
+---
+
+<div class="font-mono text-xl">
+    <span class="text-(--color-accent)">{text}:</span>
+    <input
+        class="w-32 outline-none border-none text-white mix-blend-difference"
+        id={text}
+        type="text"
+        placeholder={placeholder}
+    />
+</div>
+
+<script define:vars={{ text }}>
+    const input = document.getElementById(text);
+
+    input.addEventListener("input", (e) => {
+        const testEl = document.createElement("div");
+        testEl.style.color = "";
+        testEl.style.color = e.target.value;
+
+        if (testEl.style.color !== "") {
+            document.documentElement.style.setProperty(text, e.target.value);
+        } else {
+            document.documentElement.style.setProperty(text, "revert");
+        }
+    });
+</script>

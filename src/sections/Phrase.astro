@@ -1,0 +1,14 @@
+---
+interface Props {
+    phrase: string;
+}
+const { phrase } = Astro.props;
+---
+
+<div id="container" class="w-full h-4/12">
+    <section id="phrase" class="size-full justify-center items-center flex">
+        <p class="font-serif text-sm md:text-2xl opacity-70">
+            “{phrase}”
+        </p>
+    </section>
+</div>

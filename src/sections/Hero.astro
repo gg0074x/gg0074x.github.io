@@ -1,0 +1,61 @@
+---
+import ColorPicker from "../components/ColorPicker.astro";
+---
+
+<div id="container" class="w-screen h-screen bg-(--color-fg) z-20 relative">
+    <section
+        id="hero"
+        class="size-full justify-center items-center flex flex-col gap-8"
+    >
+        <div class="size-32 bg-(--color-bg) box"></div>
+        <div class="flex flex-col">
+            <ColorPicker text="--color-bg" placeholder="#FFFFFF" />
+            <ColorPicker text="--color-fg" placeholder="#000000" />
+            <ColorPicker text="--color-accent" placeholder="#FF4000" />
+        </div>
+    </section>
+</div>
+
+<style>
+    .box {
+        border-radius: 32px;
+        transition: 0.3s cubic-bezier(0.175, 0.125, 0.32, 1.275);
+    }
+
+    .box:hover {
+        border-radius: 100px;
+        transform: scale(0.8);
+    }
+</style>
+
+<script>
+    const hero = document.getElementById("hero");
+    const presentation = document.getElementById("me");
+    let lastScroll = window.scrollY;
+    let isSwiping = false;
+
+    window.addEventListener("touchstart", () => {
+        isSwiping = true;
+    });
+
+    if (hero && presentation) {
+        window.addEventListener("scroll", (event) => {
+            if (isSwiping) {
+                return;
+            }
+
+            if (
+                lastScroll < window.innerHeight &&
+                window.scrollY > lastScroll
+            ) {
+                presentation.scrollIntoView({ behavior: "smooth" });
+            } else if (
+                lastScroll < window.innerHeight &&
+                window.scrollY < lastScroll
+            ) {
+                hero.scrollIntoView({ behavior: "smooth" });
+            }
+            lastScroll = window.scrollY;
+        });
+    }
+</script>

@@ -1,11 +1,27 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../sections/Hero.astro";
+import Information from "../sections/Information.astro";
+import Phrase from "../sections/Phrase.astro";
+import Presentation from "../sections/Presentation.astro";
+import dog from "../assets/dogsatellite.png";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const response = await fetch("https://api.github.com/users/gg0074x");
+let user = null;
+if (response.status == 200) {
+    user = await response.json();
+}
 ---
 
 <Layout>
-	<Welcome />
+    <Hero />
+    <div class="flex w-full justify-center">
+        <div class="w-5xl">
+            <Presentation image={user ? user.avatar_url : dog.src} />
+            <Phrase
+                phrase={user ? user.bio : "segmentation fault (core dumped)"}
+            />
+            <Information />
+        </div>
+    </div>
 </Layout>

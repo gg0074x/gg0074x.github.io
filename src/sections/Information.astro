@@ -1,0 +1,104 @@
+---
+import Project from "../components/Project.astro";
+import cloud from "../assets/cloud.jpg";
+import collage from "../assets/collage.jpg";
+import city from "../assets/city.jpg";
+import garden from "../assets/garden.jpg";
+---
+
+<div id="container" class="w-full lg:h-screen">
+    <section id="info" class="size-full justify-between items-center flex p-12">
+        <div class="hidden lg:flex flex-col items-center">
+            <p class="tag lg:inline selected">About</p>
+            <p class="tag lg:inline">Projects</p>
+            <p class="tag lg:inline">Pictures</p>
+        </div>
+        <div
+            class="flex flex-col w-full gap-20 lg:gap-0 lg:w-lg justify-center items-center text-xl"
+        >
+            <div class="flex flex-col w-full justify-center items-center gap-8">
+                <p class="text-2xl lg:hidden">About</p>
+                <p class="content text-md md:text-lg lg:text-2xl w-full">
+                    I'm a 20 years old self-taught programmer, i'm currently
+                    studying a computer engineering career. I enjoy some
+                    videogames, anime art, and rainy days.
+                </p>
+            </div>
+            <div class="flex flex-col w-full justify-center items-center gap-8">
+                <p class="text-2xl lg:hidden">Projects</p>
+                <div class="content flex lg:hidden flex-col gap-4">
+                    <Project
+                        name="Paltone"
+                        description="Color palette extraction tool"
+                        url="https://paltone.chiwabox.dev/"
+                        repo="https://github.com/gg0074x/paltone"
+                    />
+                    <Project
+                        name="Ask CLI"
+                        description="A simple command line tool to use Google Gemini AI"
+                        repo="https://github.com/gg0074x/ask-cli"
+                    />
+                    <Project
+                        name="No Compiler"
+                        description="A no compiler to compile binary code directly"
+                        repo="https://github.com/gg0074x/no-compiler"
+                    />
+                </div>
+            </div>
+            <div class="flex flex-col w-full justify-center items-center gap-8">
+                <p class="text-2xl lg:hidden">Pictures</p>
+                <div
+                    class="content flex flex-col md:grid p-8 lg:hidden md:grid-cols-2 gap-2"
+                >
+                    <img src={cloud.src} />
+                    <img src={collage.src} />
+                    <img src={city.src} />
+                    <img src={garden.src} />
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .tag {
+        width: 100%;
+        font-size: 2rem;
+        opacity: 0.3;
+        transition: ease-in-out 0.2s;
+    }
+
+    .hiddenContent {
+        display: none;
+    }
+
+    .tag:hover,
+    .selected {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+</style>
+
+<script>
+    let tags = document.getElementsByClassName("tag");
+    let contents = document.getElementsByClassName("content");
+
+    for (const [index, tag] of Array.from(tags).entries()) {
+        if (tag) {
+            tag.addEventListener("click", (e) => {
+                for (const otherTag of tags) {
+                    otherTag.classList.remove("selected");
+                }
+                tag.classList.add("selected");
+
+                for (const content of contents) {
+                    content.classList.add("lg:hidden");
+                }
+
+                if (contents[index]) {
+                    contents[index].classList.remove("lg:hidden");
+                }
+            });
+        }
+    }
+</script>

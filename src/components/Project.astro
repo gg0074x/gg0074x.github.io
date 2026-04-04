@@ -1,0 +1,35 @@
+---
+interface Props {
+    name: string;
+    description: string;
+    url: string | null;
+    repo: string | null;
+}
+const { name, description, url, repo } = Astro.props;
+---
+
+<div
+    class="flex w-sm justify-between items-center px-4 py-1 border border-solid border-(--color-fg)/50 rounded-2xl"
+>
+    <div>
+        <h2 class="text-2xl font-semibold">{name}</h2>
+        <p class="text-sm">{description}</p>
+    </div>
+    <div class="flex gap-3">
+        {
+            url && (
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                    <span class="mgc_external_link_fill text-3xl" />
+                </a>
+            )
+        }
+
+        {
+            repo && (
+                <a href={repo} target="_blank" rel="noopener noreferrer">
+                    <span class="mgc_github_fill text-3xl" />
+                </a>
+            )
+        }
+    </div>
+</div>
