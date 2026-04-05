@@ -30,10 +30,13 @@
     color: inherit !important;
 }
 
+*,
+*::before,
+*::after,
 *:hover,
 *:active {
     cursor:
-        url("cursor.svg") 10 10,
+        url("/cursor.svg") 10 10,
         auto;
 }
 

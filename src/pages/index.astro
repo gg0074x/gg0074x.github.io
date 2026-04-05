@@ -16,7 +16,7 @@ if (response.status == 200) {
 <Layout>
     <Hero />
     <div class="flex w-full justify-center">
-        <div class="w-5xl">
+        <div class="w-full max-w-5xl">
             <Presentation image={user ? user.avatar_url : dog.src} />
             <Phrase
                 phrase={user ? user.bio : "segmentation fault (core dumped)"}
